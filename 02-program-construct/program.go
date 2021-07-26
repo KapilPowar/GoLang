@@ -112,6 +112,7 @@ func main() {
 		fallthrough
 	case 7:
 		fmt.Println("n <= 7")
+		fallthrough
 	case 8:
 		fmt.Println("n <= 8")
 		fallthrough
