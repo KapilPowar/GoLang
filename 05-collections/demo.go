@@ -93,11 +93,7 @@ func main() {
 	delete(cityRanks, "Mangalore")
 	fmt.Println(cityRanks)
 
-	var test map[int]int = map[int]int{
-		100: 4,
-		150: 1,
-		30:  3,
-		45:  2,
-	}
+	var test map[int]int = map[int]int{}
+	test[100] = 4
 	fmt.Println(test)
 }
