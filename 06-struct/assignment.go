@@ -1,3 +1,20 @@
+/*
+write the following utility functions to manipulate the products
+	IndexOf => returns the index of the given product
+	Includes => return true/false based on the presence of the given product in the products list
+	Any => return true /false based on the presence of atleast one product in the list matching the given criteria
+		use case:
+			Is there any cost product? (cost > 500)
+			Is there any stationary product? (category == "Stationary")
+	All => return true /false based on the condition that all the products in the list satisfy the given criteria
+		use case:
+			Are all products cost products? (cost > 500)
+			Are all products stationary products? (category == "stationary")
+	Filter => filter the products based on the given criteria
+		use case:
+			filter utencils from the products list
+			filter under stocked products from the products list (units < 10)
+*/
 package main
 
 import "fmt"
@@ -19,23 +36,61 @@ func main() {
 		Product{101, "Phone", 5000, 3, "Electronics"},
 		Product{100, "Bowl", 100, 50, "Utencil"},
 	}
-	fmt.Println(products)
+	fmt.Println(products[0])
+
+	anyStationaryProducts := any(&products, func(product Product) bool {
+		return product.Category == "Stationary"
+	})
+
+	allCostlyProducts := all(&products, func(product Product) bool {
+		return product.Cost < 500
+	})
+
+	underStockProducts := filter(&products, func(product Product) bool {
+		return product.Units < 10
+	})
+	fmt.Println(anyStationaryProducts)
+	fmt.Println(allCostlyProducts)
+
+	fmt.Println(underStockProducts)
 }
 
-/*
-write the following utility functions to manipulate the products
-	IndexOf => returns the index of the given product
-	Includes => return true/false based on the presence of the given product in the products list
-	Any => return true /false based on the presence of atleast one product in the list matching the given criteria
-		use case:
-			Is there any cost product? (cost > 500)
-			Is there any stationary product? (category == "Stationary")
-	All => return true /false based on the condition that all the products in the list satisfy the given criteria
-		use case:
-			Are all products cost products? (cost > 500)
-			Are all products stationary products? (category == "stationary")
-	Filter => filter the products based on the given criteria
-		use case:
-			filter utencils from the products list
-			filter under stocked products from the products list (units < 10)
-*/
+func indexOf(products *[]Product, product Product) int {
+	for index, currentProduct := range *products {
+		if currentProduct == product {
+			return index
+		}
+	}
+	return -1
+}
+
+func includes(products *[]Product, product Product) bool {
+	return indexOf(products, product) != -1
+}
+
+func any(products *[]Product, predicate func(product Product) bool) bool {
+	for _, product := range *products {
+		if predicate(product) {
+			return true
+		}
+	}
+	return false
+}
+func all(products *[]Product, predicate func(product Product) bool) bool {
+	for _, product := range *products {
+		if !predicate(product) {
+			return false
+		}
+	}
+	return true
+}
+
+func filter(products *[]Product, predicate func(product Product) bool) *[]Product {
+	result := []Product{}
+	for _, product := range *products {
+		if predicate(product) {
+			result = append(result, product)
+		}
+	}
+	return &result
+}
