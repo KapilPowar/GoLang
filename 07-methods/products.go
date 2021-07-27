@@ -68,6 +68,11 @@ func main() {
 		return product.Category == "Stationary"
 	})
 	fmt.Println(anyStationaryProducts)
+
+	allCostlyProducts := products.all(func(product Product) bool {
+		return product.Cost < 500
+	})
+	fmt.Println(allCostlyProducts)
 }
 
 /*
