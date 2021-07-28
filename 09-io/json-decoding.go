@@ -22,7 +22,7 @@ type Product struct {
 
 /* fmt.Stringer interface implementation */
 func (p Product) String() string {
-	return fmt.Sprintf("Id = %d, Name = %s, Cost = %v, Units = %d, Category = %s", p.Id, p.Name, p.Cost, p.Units, p.Category)
+	return fmt.Sprintf("Id = %d, Name = %s, Cost = %v, Units = %d, Category = %+v", p.Id, p.Name, p.Cost, p.Units, p.Category)
 }
 
 func main() {
