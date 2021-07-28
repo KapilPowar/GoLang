@@ -21,6 +21,7 @@ func main() {
 	fmt.Println(result)
 	wg.Wait()
 	fmt.Println("Done")
+
 }
 
 func add(x, y int, ch chan int, elapseTime time.Duration) {
