@@ -23,7 +23,7 @@ func (alphaReader AlphaReader) Read(p []byte) (n int, err error) {
 func copy(writer io.Writer, reader io.Reader) {
 	totalBytesRead := 0
 	for {
-		buffer := make([]byte, 10)
+		buffer := make([]byte, 1024)
 		bytesRead, err := reader.Read(buffer)
 
 		totalBytesRead += bytesRead
