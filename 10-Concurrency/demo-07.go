@@ -9,8 +9,9 @@ func main() {
 
 	ch := make(chan int)
 	go add(10, 20, ch)
-	result := <-ch
-	fmt.Println(result)
+	//result := <-ch
+	<-ch
+	//fmt.Println(result)
 	fmt.Println("Done")
 }
 
