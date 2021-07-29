@@ -11,7 +11,8 @@ func main() {
 	x = 20
 	x = "Dummy string"
 	x = true
-	fmt.Println(x)
+	x = 21
+	fmt.Println("X:", x)
 
 	//x =
 	if no, ok := x.(int); ok {
@@ -34,6 +35,8 @@ func main() {
 		fmt.Println("Len of x is ", len(val))
 	case Employee:
 		fmt.Println("x is an Employee with name ", val.Name)
+	case interface{}:
+		fmt.Println("x is an interface type with  ", val)
 	default:
 		fmt.Println("x is of unknown type")
 	}
